@@ -1,26 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/page/layout'
+import HelloWorld from '@/components/HelloWorld'
 import Main from '@/page/main'
-import User from '@/page/user'
+import Ueditor from '@/components/ueditor'
+import Test from '@/page/test'
+import Index from '@/page/index'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
+  routes: [{
+    path: '/',
+    name: 'Index',
+    component: Index,
+    children: [{
       path: '/',
-      name: 'Layout',
-      component: Layout,
-      children: [{
-        path: '/',
-        name: 'Main',
-        component: Main
-      },{
-        path: '/user',
-        name: 'User',
-        component: User
-      }]
-    }
-  ]
+      name: 'Main',
+      component: Main
+    },{
+      path: '/hello',
+      name: 'HelloWorld',
+      component: HelloWorld
+    }]
+  },{
+    path: '/test',
+    name: 'Test',
+    component: Test
+  }]
 })

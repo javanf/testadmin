@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+  }
 }
 </script>
 
@@ -23,8 +25,13 @@ html,body{
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   height: 100%;
+}
+.right{
+  float: right!important;
+}
+.el-breadcrumb{
+  height: 30px;
+  line-height: 30px;
 }
 </style>

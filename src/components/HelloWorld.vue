@@ -1,5 +1,11 @@
 <template>
   <div class="hello">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+      <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+      <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+    </el-breadcrumb>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -96,6 +102,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.el-breadcrumb{
+  height: 30px;
+  line-height: 30px;
+}
 h1, h2 {
   font-weight: normal;
 }

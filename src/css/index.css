@@ -1,0 +1,29 @@
+.layout{
+  width: 100%;
+}
+.el-menu-top{
+  height: 60px;
+}
+.el-container{
+  position: absolute; 
+  width: 100%; 
+  top: 0px ; 
+  left: 0 ; 
+  bottom: 0;
+}
+.el-header{
+  padding: 0;
+  z-index: 1000;
+}
+.el-aside, .el-main{
+  margin-top: 60px;
+}
+.el-menu-vertical-left{
+  width: 210px;
+  background: #545c64;
+  height: 100%;
+  float: left;
+}
+.el-menu.el-menu--horizontal{
+  border-bottom: none;
+}
