@@ -5,6 +5,8 @@ import Main from '@/page/main'
 import Ueditor from '@/components/ueditor'
 import Test from '@/page/test'
 import Index from '@/page/index'
+import Popup from '@/page/popup'
+import Table from '@/page/table'
 
 Vue.use(Router)
 
@@ -21,10 +23,18 @@ export default new Router({
       path: '/hello',
       name: 'HelloWorld',
       component: HelloWorld
+    },{
+      path: '/test',
+      name: 'Test',
+      component: Test
+    },{
+      path: '/popup',
+      name: 'Popup',
+      component: Popup
+    },{
+      path: '/table',
+      name: 'Table',
+      component: Table
     }]
-  },{
-    path: '/test',
-    name: 'Test',
-    component: Test
   }]
 })

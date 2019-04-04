@@ -1,51 +1,106 @@
 <template>
   <div>
-    <ul>
-      <li v-for="(item, index) in list">
-        <span>{{item.text}}</span><button @click.stop="play(item, index)">{{index===activeIndex?'暂停':'播放'}}</button>
-      </li>
-    </ul>
+    <el-checkbox :indeterminate="isIndeterminateA" v-model="checkAllALL" @change="handleCheckAllChangeALL">全选所有</el-checkbox>
+    <br>
+    <br>
+    <br>
+    <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+    <div style="margin: 15px 0;"></div>
+    <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+      <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    </el-checkbox-group>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <el-checkbox :indeterminate="isIndeterminate2" v-model="checkAll2" @change="handleCheckAllChange2">全选</el-checkbox>
+    <div style="margin: 15px 0;"></div>
+    <el-checkbox-group v-model="checkedCities2" @change="handleCheckedCitiesChange2">
+      <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+    </el-checkbox-group>
+
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+const cityOptions = ['上海', '北京', '广州', '深圳'];
 
 export default {
   data(){
     return {
-      list: [{
-        text: '随着前端开发越来越关注效率：通过选择器的使用和简化代码来快速加载渲染。'
-      }, {
-        text: 'css重置库如normalize.css已经被使用很多年了，'
-      }, {
-        text: '当你多少次试着去设计栅格布局如：组合或者图片画廊，'
-      }],
-      activeIndex: ''
+      checkAllALL: false,
+      isIndeterminateA: true,
+
+      checkedCities: ['上海', '北京'],
+      cities: cityOptions,
+      checkAll: false,
+      isIndeterminate: true,
+      checkedCities2: ['上海', '北京'],
+      checkAll2: false,
+      isIndeterminate2: true
     }
   },
   methods: {
-    play(item, index) {
-      if(this.activeIndex === index){
-        this.cancel();
+    checkIsAll() {
+      console.log(this.checkedCities, this.checkedCities2);
+      if(this.checkAll && this.checkAll2){
+        this.checkAllALL = true;
+        this.isIndeterminateA = false;
+        return;
+      } else {
+        this.checkAllALL = false;
+      }
+      if(!this.checkAll && !this.checkAll2 && !this.isIndeterminate && !this.isIndeterminate2){
+        this.checkAllALL = false;
+        this.isIndeterminateA = false;
         return;
       }
-      this.activeIndex = index;
-      this.newSpeech(item.text);
+      if(!this.isIndeterminate || !this.isIndeterminate2){
+        this.isIndeterminateA = true;
+      }
     },
-    cancel(){
-      window.speechSynthesis.cancel();
+    handleCheckAllChange(val) {
+      this.checkedCities = val ? cityOptions : [];
+      this.isIndeterminate = false;
+
+      this.checkIsAll();
     },
-    newSpeech(text, type) {
-      this.cancel();
-      setTimeout(()=>{
-        this.utterance = new SpeechSynthesisUtterance(text);
-        window.speechSynthesis.speak(this.utterance);
-        this.utterance.onend = ()=>{
-          this.activeIndex = '';
-        }
-      }, 500)
-    }
+    handleCheckedCitiesChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+
+      this.checkIsAll();
+    },
+    handleCheckAllChange2(val) {
+      this.checkedCities2 = val ? cityOptions : [];
+      this.isIndeterminate2 = false;
+
+      this.checkIsAll();
+    },
+    handleCheckedCitiesChange2(value) {
+      let checkedCount = value.length;
+      this.checkAll2 = checkedCount === this.cities.length;
+      this.isIndeterminate2 = checkedCount > 0 && checkedCount < this.cities.length;
+
+      this.checkIsAll();
+    },
+    handleCheckAllChangeALL(val) {
+
+      this.isIndeterminateA = false;
+
+      this.checkedCities = val ? cityOptions : [];
+      this.isIndeterminate = false;
+      this.checkAll = val ? true : false;
+
+      this.checkedCities2 = val ? cityOptions : [];
+      this.isIndeterminate2 = false;
+      this.checkAll2 = val ? true : false;
+
+      this.checkIsAll();
+    },
   }
 }
 </script>
